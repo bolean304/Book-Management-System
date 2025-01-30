@@ -91,7 +91,6 @@ The server will start on `http://localhost:8080`
 - **Password Hashing**: User passwords are hashed using `bcrypt` before storage.
 - **JWT Authentication**: API access is secured using JWT tokens.
 - **Input Validation & SQL Injection Prevention**: Using Gin’s request binding and GORM to prevent raw SQL injections.
-- **Data Encryption Utility**: Basic encryption and decryption for user notes using AES.
 
 
 ## Author
