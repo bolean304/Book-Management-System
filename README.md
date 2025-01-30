@@ -85,7 +85,7 @@ The server will start on `http://localhost:8080`
 | Method | Endpoint       | Description |
 |--------|---------------|-------------|
 | POST   | `/book-borrow`      | Borrow books |
-| GET    | `/etch-borrowed-books/:user_id` | Get all books borrowed by a user |
+| GET    | `/fetch-borrowed-books/:user_id` | Get all books borrowed by a user |
 
 ## Security and Cryptography
 - **Password Hashing**: User passwords are hashed using `bcrypt` before storage.
