@@ -42,9 +42,9 @@ func RegisterUser(c *gin.Context) {
 	// Hash the user's password
 	hashedPassword, err := utils.HashPassword(user.Password)
 	if err != nil {
-		log.Fatal("Password hashing failed : %v", err)
+		log.Fatalf("Password hashing failed : %v", err)
 	}
-	log.Println("hashedPassword : %v", hashedPassword)
+	log.Printf("hashedPassword : %v", hashedPassword)
 	user.Password = hashedPassword
 
 	// Create the new user
@@ -80,15 +80,14 @@ func Login(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Try Again"})
 		return
 	}
-	log.Println("db user data : %v", dbData)
+	log.Printf("db user data : %v", dbData)
 	err := bcrypt.CompareHashAndPassword([]byte(dbData.Password), []byte(user.Password))
 	if err != nil {
-		log.Println("err of bcrp :%v", err)
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid User"})
 		return
 	}
 	claims := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"sub": user.Username,
+		"sub": dbData.ID,
 		"exp": time.Now().Add(time.Hour * 24).Unix(), // expires in 24 hours
 	})
 	err = godotenv.Load()

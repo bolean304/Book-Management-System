@@ -14,7 +14,7 @@ import (
 This function handles the request for adding the book from user.
 -------------------------------------------------------------------
 */
-func AddBook(c *gin.Context) {
+func HandleAddBook(c *gin.Context) {
 	var book models.Book
 
 	// Bind incoming JSON to book struct
@@ -45,7 +45,7 @@ This function handles the request for fetching the all saved books in database t
 -------------------------------------------------------------------------------------------
 */
 
-func ViewBooks(c *gin.Context) {
+func HandleViewBooks(c *gin.Context) {
 	var books []models.Book
 	config.DB.Find(&books)
 	c.JSON(http.StatusOK, books)
@@ -57,7 +57,7 @@ This function handles the request for searching the book based on title and auth
 -------------------------------------------------------------------------------------------
 */
 
-func SearchBooks(c *gin.Context) {
+func HandleSearchBooks(c *gin.Context) {
 	// Get the title and author query parameters from the request
 	title := c.DefaultQuery("title", "")
 	author := c.DefaultQuery("author", "")
@@ -101,7 +101,7 @@ func SearchBooks(c *gin.Context) {
 This function handles the request for updating the book details based on ID.
 -------------------------------------------------------------------------------------------
 */
-func UpdateBook(c *gin.Context) {
+func HandleUpdateBook(c *gin.Context) {
 	var book models.Book
 	id := c.Param("id")
 
@@ -127,7 +127,7 @@ func UpdateBook(c *gin.Context) {
 This function handles the request for deleting  the book details based on ID.
 -------------------------------------------------------------------------------------------
 */
-func DeleteBook(c *gin.Context) {
+func HandleDeleteBook(c *gin.Context) {
 	id := c.Param("id")
 
 	var book models.Book

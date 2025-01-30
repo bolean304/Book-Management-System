@@ -2,6 +2,7 @@ package routes
 
 import (
 	"book-management-system/controllers"
+	"book-management-system/middleware"
 
 	"github.com/gin-gonic/gin"
 )
@@ -9,13 +10,13 @@ import (
 func RegisterRoutes(r *gin.Engine) {
 	r.POST("/register", controllers.RegisterUser)
 	r.POST("/login", controllers.Login)
-
+	r.Use(middleware.AuthenticationMiddleware)
 	// Book management routes
-	r.POST("/add-book", controllers.AddBook)
-	r.GET("/fetch-books", controllers.ViewBooks)
-	r.GET("/books/search", controllers.SearchBooks)
-	r.PUT("/books/:id", controllers.UpdateBook)
-	r.DELETE("/books/:id", controllers.DeleteBook)
+	r.POST("/add-book", controllers.HandleAddBook)
+	r.GET("/fetch-books", controllers.HandleViewBooks)
+	r.GET("/books/search", controllers.HandleSearchBooks)
+	r.PUT("/books/:id", controllers.HandleUpdateBook)
+	r.DELETE("/books/:id", controllers.HandleDeleteBook)
 
 	// Borrowing routes
 	r.POST("/book-borrow", controllers.HnadleBorrowBooksRequest)
